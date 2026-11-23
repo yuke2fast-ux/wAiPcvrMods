@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corpse's PCVR Mods</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #000;
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    height: 80px;
+    padding: 0 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #171717;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: -0.7px;
+}
+
+.logo span {
+    color: #777;
+}
+
+.discord {
+    text-decoration: none;
+    color: white;
+    background: #111;
+    border: 1px solid #252525;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.discord:hover {
+    background: white;
+    color: black;
+}
+
+main {
+    max-width: 1100px;
+    margin: 65px auto;
+    padding: 0 25px;
+}
+
+.hero {
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    letter-spacing: -2px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    color: #777;
+    font-size: 14px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.tab {
+    padding: 12px 22px;
+    border-radius: 12px;
+    border: 1px solid #222;
+    background: #101010;
+    color: #888;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.tab:hover {
+    border-color: #444;
+}
+
+.tab.active {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+.section-title {
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+.mods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.mod-card {
+    background: #0a0a0a;
+    border: 1px solid #1c1c1c;
+    border-radius: 17px;
+    padding: 22px;
+    transition: 0.2s;
+}
+
+.mod-card:hover {
+    border-color: #333;
+    transform: translateY(-3px);
+}
+
+.mod-icon {
+    width: 43px;
+    height: 43px;
+    background: #171717;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    font-size: 19px;
+}
+
+.mod-card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    overflow-wrap: anywhere;
+}
+
+.mod-card p {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.download {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    background: #151515;
+    border: 1px solid #242424;
+    text-align: center;
+    padding: 12px;
+    border-radius: 11px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.download:hover {
+    background: white;
+    color: black;
+}
+
+.empty {
+    grid-column: 1 / -1;
+    padding: 65px 20px;
+    text-align: center;
+    border: 1px dashed #222;
+    border-radius: 17px;
+}
+
+.empty h3 {
+    color: #777;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.empty p {
+    color: #444;
+    font-size: 13px;
+}
+
+footer {
+    padding: 45px 20px;
+    text-align: center;
+    color: #444;
+    font-size: 12px;
+}
+
+@media(max-width: 600px) {
+    header {
+        padding: 0 20px;
+    }
+
+    main {
+        margin-top: 40px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .mods-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Corpse's <span>Mods</span></div>
+
+    <a class="discord"
+       href="https://discord.gg/CUfqwbudj3"
+       target="_blank"
+       rel="noopener noreferrer">
+       Discord ↗
+    </a>
+</header>
+
+<main>
+
+    <section class="hero">
+        <h1>Corpse's Pcvr Mods</h1>
+        <p>PCVR mods & APK mods.</p>
+    </section>
+
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab('pcvr', this)">
+            PCVR Mods
+        </button>
+
+        <button class="tab" onclick="switchTab('apk', this)">
+            APK Mods
+        </button>
+    </div>
+
+    <h2 class="section-title" id="sectionTitle">PCVR Mods</h2>
+
+    <div class="mods-grid" id="modsGrid"></div>
+
+</main>
+
+<footer>
+    Corpse's Mods
+</footer>
+
+<script>
+
+/*
+=====================================
+ ADD MODS HERE
+=====================================
+
+PCVR mods:
+{
+    name: "Mod Name",
+    description: "Mod description",
+    file: "mods/modname.zip"
+}
+
+APK mods:
+{
+    name: "Mod Name",
+    description: "Mod description",
+    file: "mods/modname.apk"
+}
+
+*/
+
+const mods = {
+    pcvr: [
+        {
+            name: "UABEA (Windows)",
+            description: "Unity Asset Bundle Extractor Avalonia - view and edit Unity assets and bundles.",
+            file: "mods/uabea-windows.zip"
+        }
+    ],
+
+    apk: [
+        // APK mods go here
+    ]
+};
+
+let currentTab = "pcvr";
+
+function switchTab(tab, button) {
+    currentTab = tab;
+
+    document.querySelectorAll(".tab").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    document.getElementById("sectionTitle").textContent =
+        tab === "pcvr" ? "PCVR Mods" : "APK Mods";
+
+    renderMods();
+}
+
+function renderMods() {
+    const grid = document.getElementById("modsGrid");
+
+    grid.innerHTML = "";
+
+    const currentMods = mods[currentTab];
+
+    if (currentMods.length === 0) {
+        grid.innerHTML = `
+            <div class="empty">
+                <h3>No mods available</h3>
+                <p>Mods will be added here soon.</p>
+            </div>
+        `;
+        return;
+    }
+
+    currentMods.forEach(mod => {
+        const card = document.createElement("div");
+
+        card.className = "mod-card";
+
+        const icon = currentTab === "apk" ? "📱" : "📦";
+
+        card.innerHTML = `
+            <div class="mod-icon">${icon}</div>
+
+            <h3>${mod.name}</h3>
+
+            <p>${mod.description || "Mod download"}</p>
+
+            <a class="download" href="${mod.file}" download>
+                Download
+            </a>
+        `;
+
+        grid.appendChild(card);
+    });
+}
+
+renderMods();
+
+</script>
+
+</body>
+</html>
